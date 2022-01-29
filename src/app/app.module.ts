@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './hoc/layout/layout.component';
-import { HomePageComponent } from './hoc/page-component/home-page/home-page.component';
-import { SettingsPageComponent } from './hoc/page-component/settings-page/settings-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,13 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    HomePageComponent,
-    SettingsPageComponent,
     HomeComponent,
     SettingsComponent
   ],
@@ -34,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
