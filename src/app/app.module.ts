@@ -1,40 +1,23 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { LayoutComponent } from './hoc/layout/layout.component';
-import { HomeComponent } from './components/home/home.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav'; 
-import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card'; 
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LayoutComponent,
-    HomeComponent,
-    SettingsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    HttpClientModule,
-    MatCardModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

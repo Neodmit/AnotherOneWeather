@@ -5,11 +5,7 @@
       <img src={{logoPath}} alt="Disaster"/>
       <span calss="menu-header-text">Dashboard Kit</span>
     </a>
-    <a *ngFor="let item of menuItems" routerLink="{{item.link}}">
-      <button mat-button class="menu-button" >
-        {{item.name}}
-      </button>
-    </a>
+    <app-menu></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="!menuOpenness">
@@ -22,7 +18,6 @@
         <mat-icon aria-hidden="false" >menu</mat-icon>
       </button>
     </div>
-    <router-outlet></router-outlet>
+    <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- [style]=buttonStyle -->

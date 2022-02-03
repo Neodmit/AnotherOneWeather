@@ -1,5 +1,7 @@
+@import "../../../styles/core/";
+
 .settings-page{
-    background-color: #363740;
+    background-color: $color-menu-background;
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,22 +22,20 @@
     margin-top: 8px !important;
 }
 
-.settings-header-home1{
+.settings-header-home-logo{
     margin-bottom: 12px;//Точно ли там 12, как по мне больше. Как проверить, что делать?
 }
 
-.settings-header-home2{
+.settings-header-home-text{
     text-decoration: none;
-    font-family: 'Mulish';
-    font-style: normal;
+    @include font-base;
     font-weight: 700;
     font-size:  19px;
-    color: #A4A6B3;
+    color: $color-menu-text;
 }
 
 .settings-content-header{
-    font-family: 'Mulish';
-    font-style: normal;
+    @include font-base;
     font-weight: 700;
     font-size:  24px;
     color: #252733;
@@ -43,8 +43,7 @@
 }
 
 .settings-content-description{
-    font-family: 'Mulish';
-    font-style: normal;
+    @include font-base;
     font-weight: 400;
     font-size:  14px;
     color: #9FA2B4;
@@ -58,8 +57,7 @@
 }
 
 .settings-content-input-text{
-    font-family: 'Mulish';
-    font-style: normal;
+    @include font-base;
     font-weight: 700;
     font-size:  12px;
     color: #9FA2B4;
@@ -78,9 +76,8 @@
     color: #4B506D;
 }
 
-.settings-content-input-field::-moz-placeholder {
-    font-family: 'Mulish';
-    font-style: normal;
+.settings-content-input-field::placeholder {
+    @include font-base;
     font-weight: 400;
     font-size:  14px;
     //margine не работает, хз чё делать
@@ -90,7 +87,7 @@
 .settings-content-input-btn{
     width: 316px;
     height: 48px;
-    background-color: #3751FF;
+    background-color: $color-button;
     color: white;
     border-radius: 8px;
 }

@@ -1,12 +1,12 @@
 <div class="settings-page">
     <mat-card class="settings-card">
         <mat-card-header class="settings-header">
-            <div class="settings-header-home1">
+            <div class="settings-header-home-logo">
                 <a routerLink="/">
                     <img src={{logoPath}} alt="Disaster"/>
                 </a>
             </div>
-            <a routerLink="/" class="settings-header-home2">
+            <a routerLink="/" class="settings-header-home-text">
                 <span>Dashboard Kit</span>
             </a>
         </mat-card-header>
@@ -33,7 +33,7 @@
                     <input class="settings-content-input-field" type="text" placeholder="Api" name="api" [(ngModel)] = "userData.api"> 
                 </div>
     
-                <button mat-button type="submit" class="settings-content-input-btn">Log In</button>
+                <button mat-button type="submit" class="settings-content-input-btn">Set data</button>
             </form>
         </mat-card-content>
     </mat-card>

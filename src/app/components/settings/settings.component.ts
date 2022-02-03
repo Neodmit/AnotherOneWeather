@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalstorageService } from 'src/app/services/localstorageService.service';
+
+type userType = {
+  name:String,
+  surname:String,
+  api:String
+}
 
 @Component({
   selector: 'app-settings',
@@ -6,25 +13,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  
   logoPath:string = "resources/pics/logo.svg";
-
-  userData = {
-    name:String,
-    surname:String,
-    api:String
+  userData:userType = {
+    name: ' ',
+    surname: ' ',
+    api: ' '
   }
 
-  jsonUserData:any
-
-  constructor() { }
+  constructor(private localstorageService: LocalstorageService) { }
 
   ngOnInit(): void {
-    this.jsonUserData = localStorage.getItem('UserData')
-    this.userData = JSON.parse(this.jsonUserData);
+    this.userData = this.localstorageService.getLocalstorageData('UserData')
   }
 
-  onSubmit(){
-    localStorage.setItem('UserData', JSON.stringify(this.userData));
+  onSubmit(): void {
+    this.localstorageService.setLocalstorageData('UserData',this.userData);
   }
 
 }
