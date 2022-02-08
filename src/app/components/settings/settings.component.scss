@@ -1,0 +1,93 @@
+@import "../../../styles/core/";
+
+.settings-page{
+    background-color: $color-menu-background;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-card{
+    width: 380px;
+    height: 582px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 32px;
+}
+
+.settings-header{
+    display: inline-block;
+    margin-top: 8px !important;
+}
+
+.settings-header-home-logo{
+    margin-bottom: 12px;//Точно ли там 12, как по мне больше. Как проверить, что делать?
+}
+
+.settings-header-home-text{
+    text-decoration: none;
+    @include font-base;
+    font-weight: 700;
+    font-size:  19px;
+    color: $color-menu-text;
+}
+
+.settings-content-header{
+    @include font-base;
+    font-weight: 700;
+    font-size:  24px;
+    color: #252733;
+    margin-bottom: 12px;
+}
+
+.settings-content-description{
+    @include font-base;
+    font-weight: 400;
+    font-size:  14px;
+    color: #9FA2B4;
+    margin-bottom: 48px;
+}
+
+.settings-content-input{
+    text-align: left;
+    margin-bottom: 24px;
+    
+}
+
+.settings-content-input-text{
+    @include font-base;
+    font-weight: 700;
+    font-size:  12px;
+    color: #9FA2B4;
+    display:inline-block;
+    margin-bottom: 6px;
+}
+
+.settings-content-input-field{
+    width: 316px;
+    height: 42px;
+    border-radius: 8px;
+    border: solid;
+    border-width: 1px;
+    border-color: #F0F1F7;
+    background-color: #FCFDFE;
+    color: #4B506D;
+}
+
+.settings-content-input-field::placeholder {
+    @include font-base;
+    font-weight: 400;
+    font-size:  14px;
+    //margine не работает, хз чё делать
+}
+
+
+.settings-content-input-btn{
+    width: 316px;
+    height: 48px;
+    background-color: $color-button;
+    color: white;
+    border-radius: 8px;
+}

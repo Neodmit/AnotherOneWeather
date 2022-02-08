@@ -1,0 +1,40 @@
+<div class="settings-page">
+    <mat-card class="settings-card">
+        <mat-card-header class="settings-header">
+            <div class="settings-header-home-logo">
+                <a routerLink="/">
+                    <img src={{logoPath}} alt="Disaster"/>
+                </a>
+            </div>
+            <a routerLink="/" class="settings-header-home-text">
+                <span>Dashboard Kit</span>
+            </a>
+        </mat-card-header>
+        <mat-card-content>
+            <div>
+                <h2 class="settings-content-header">
+                    Set up data
+                </h2>
+                <h3 class="settings-content-description">
+                    Enter your name, surname and wether api below
+                </h3>
+            </div>
+            <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="settings-content-input">
+                    <label class="settings-content-input-text">Name</label><br>
+                    <input class="settings-content-input-field" type="text" placeholder="Name" name="name" [(ngModel)] = "userData.name"> 
+                </div>
+                <div class="settings-content-input">
+                    <label class="settings-content-input-text">Surname</label><br>
+                    <input class="settings-content-input-field" type="text" placeholder="Surname" name="surname" [(ngModel)] = "userData.surname"> 
+                </div>
+                <div class="settings-content-input">
+                    <label class="settings-content-input-text">Api</label><br>
+                    <input class="settings-content-input-field" type="text" placeholder="Api" name="api" [(ngModel)] = "userData.api"> 
+                </div>
+    
+                <button mat-button type="submit" class="settings-content-input-btn">Set data</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
