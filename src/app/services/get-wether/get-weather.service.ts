@@ -1,43 +1,33 @@
 import { Injectable } from '@angular/core';
 import { CityType } from 'src/app/types/CityType';
-import { PostService } from '../post/post.service';
 import { WeatherType } from 'src/app/types/WeatherType';
-import { UserDataService } from '../user-data/user-data.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { OpenWeatherApiService } from '../open-weather/open-weather.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetWeatherService {
+export class GetCurrentWeatherService {
 
-  private items:WeatherType = {
-    name: "",
-    wind: {
-      speed:null
-    },
-    main: {
-      temp:null,
-      humidity:null
-    }
-  };
-  private url = "http://api.openweathermap.org/data/2.5/weather?q=";
-  private  subscribe?: Subscription;
+  private item?:WeatherType
   private subscriptions: Array<Subscription> = []
 
+  constructor(private openWeatherApiService:OpenWeatherApiService) { }
 
-  constructor(private postService:PostService, private userDataService:UserDataService) { }
-
-  setWeatherData(city:CityType):WeatherType{
-    this.subscribe = this.postService.getPosts(this.url + city.name + "&appid=" + this.userDataService.getApi()).subscribe(data => {
-      this.items = data;
-    })
-    this.subscriptions.push(this.subscribe)
-    return this.items;
+  async getWeatherData(city:CityType):Promise<WeatherType>{
+      return new Promise((resolve) => 
+       this.openWeatherApiService.get(city.name).subscribe(
+        async data =>{
+          this.item = await data
+          resolve(this.item)
+        })
+      )
   }
 
   unsubscribe(): void{
     for(let subscribe of this.subscriptions){
       subscribe.unsubscribe();
+      console.log(subscribe.closed)//Ты говорил, что он так не будет работать, но тут он выводит TRUE
     }
   }
 }

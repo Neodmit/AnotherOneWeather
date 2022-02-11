@@ -8,16 +8,12 @@ import { UserType } from 'src/app/types/UserType';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent{
 
-  userData:UserType = this.userDataService.getUserData();
-  
+  userData:UserType = this.userDataService.getUser();
   logoPath:string = "resources/pics/logo.svg";
-  constructor(private localstorageService: LocalstorageService, private userDataService:UserDataService) { }
 
-  ngOnInit(): void {
-    this.userDataService.setUserData(this.localstorageService.getData('UserData'))
-  }
+  constructor(private localstorageService: LocalstorageService, private userDataService:UserDataService) { }
 
   onSubmit(): void {
     this.localstorageService.setData('UserData', this.userData);

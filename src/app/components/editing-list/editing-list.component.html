@@ -1,5 +1,5 @@
-  <div *ngIf = "weatherItems.length == citiesLength">
-    <table mat-table [dataSource]="weatherItems" style="width: 100%;" >
+  <div *ngIf = "weatherItems.length == citiesLength" class="editing-page">
+    <table mat-table [dataSource]="weatherItems" class="editing-table">
     
       <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef>City</th>
@@ -8,17 +8,17 @@
 
       <ng-container matColumnDef="windSpeed">
         <th mat-header-cell *matHeaderCellDef>Wind Speed</th>
-        <td mat-cell *matCellDef="let element">{{element.wind.speed}}</td>
+        <td mat-cell *matCellDef="let element">{{element.wind.speed + " m/s"}}</td>
       </ng-container>
 
       <ng-container matColumnDef="temp">
         <th mat-header-cell *matHeaderCellDef>Tempreture</th>
-        <td mat-cell *matCellDef="let element">{{(element.main.temp - 273).toFixed(2)}}</td>
+        <td mat-cell *matCellDef="let element">{{(element.main.temp - 273).toFixed(2) + " *C"}}</td>
       </ng-container>
 
       <ng-container matColumnDef="humidity">
         <th mat-header-cell *matHeaderCellDef>Humidity</th>
-        <td mat-cell *matCellDef="let element">{{element.main.humidity}}</td>
+        <td mat-cell *matCellDef="let element">{{element.main.humidity + "%"}}</td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

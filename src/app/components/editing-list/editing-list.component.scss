@@ -1,0 +1,16 @@
+@import "../../../styles/core/";
+
+.editing-page{
+    background-color: $color-menu-background;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.editing-table{
+    width: 80%;
+    margin-left: 165px;
+    margin-top: 80px;
+    height: 20px;
+    @include font-base;
+}

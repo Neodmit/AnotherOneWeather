@@ -15,8 +15,6 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table'; 
 
-import { UserDataService } from 'src/app/services/user-data/user-data.service';
-
 @NgModule({
   declarations: [
     MenuComponent,

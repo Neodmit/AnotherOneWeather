@@ -6,16 +6,12 @@ import { LocalstorageService } from '../local-storage/localstorageService.servic
   providedIn: 'root'
 })
 export class UserDataService {
-  private userData:UserType = this.localstorageService.getData("UserData");//будто хардкод
+  private userData:UserType = this.localstorageService.getData("UserData");
 
   constructor(private localstorageService: LocalstorageService) { 
   }
 
-  public setUserData(userData:UserType):void {
-    this.userData = userData
-  }
-
-  public getUserData():UserType {
+  public getUser():UserType {
     return this.userData 
   }
 

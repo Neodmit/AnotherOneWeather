@@ -1,11 +1,11 @@
 export type WeatherType = {
-  name:string
+  name?:string
   wind:{
-    speed:number | null
+    speed?:number 
   }
   main:{
-    temp:number | null
-    humidity:number | null
+    temp?:number
+    humidity?:number
   }
 }
  
