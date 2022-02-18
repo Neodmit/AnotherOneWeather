@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LocalstorageService } from 'src/app/services/local-storage/localstorageService.service';
 import { UserDataService } from 'src/app/services/user-data/user-data.service';
 import { UserType } from 'src/app/types/UserType';
 
@@ -10,13 +9,13 @@ import { UserType } from 'src/app/types/UserType';
 })
 export class SettingsComponent{
 
-  userData:UserType = this.userDataService.getUser();
+  userData:UserType = this.userDataService.get();
   logoPath:string = "resources/pics/logo.svg";
 
-  constructor(private localstorageService: LocalstorageService, private userDataService:UserDataService) { }
+  constructor(private userDataService:UserDataService) { }
 
   onSubmit(): void {
-    this.localstorageService.setData('UserData', this.userData);
+    this.userDataService.set(this.userData)
   }
 
 }

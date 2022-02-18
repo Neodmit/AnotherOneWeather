@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CityType } from 'src/app/types/CityType';
 import { WeatherType } from 'src/app/types/WeatherType';
-import { Subscription } from 'rxjs';
 import { OpenWeatherApiService } from '../open-weather/open-weather.service';
 
 @Injectable({
@@ -9,25 +8,20 @@ import { OpenWeatherApiService } from '../open-weather/open-weather.service';
 })
 export class GetCurrentWeatherService {
 
-  private item?:WeatherType
-  private subscriptions: Array<Subscription> = []
-
   constructor(private openWeatherApiService:OpenWeatherApiService) { }
 
-  async getWeatherData(city:CityType):Promise<WeatherType>{
-      return new Promise((resolve) => 
-       this.openWeatherApiService.get(city.name).subscribe(
-        async data =>{
-          this.item = await data
-          resolve(this.item)
-        })
+  getBatchWeatherData(cities:Array<CityType>):Promise<WeatherType[]>{
+    let tempPromArr:Array<Promise<WeatherType>> = []
+    for(let city of cities){
+      tempPromArr.push(
+        new Promise((resolve) => 
+          this.openWeatherApiService.get(city.name).subscribe(
+          async data =>{
+          resolve(await data)
+          })
+        )
       )
-  }
-
-  unsubscribe(): void{
-    for(let subscribe of this.subscriptions){
-      subscribe.unsubscribe();
-      console.log(subscribe.closed)//Ты говорил, что он так не будет работать, но тут он выводит TRUE
     }
+    return Promise.all(tempPromArr)
   }
 }

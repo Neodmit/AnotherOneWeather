@@ -1,4 +1,9 @@
-  <div *ngIf = "weatherItems.length == citiesLength" class="editing-page">
+<div class="editing-page">
+
+  <div>
+    <input type="text" [(ngModel)]="cityName" placeholder="Text city" class="editing-input" (keyup.enter)="onEnter()">
+  </div>
+
     <table mat-table [dataSource]="weatherItems" class="editing-table">
     
       <ng-container matColumnDef="city">
@@ -22,7 +27,13 @@
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
-      
+      <tr
+        mat-row
+        (click)="selectedRows.has(row) ? selectedRows.delete(row) : selectedRows.add(row)"
+        [class.demo-row-is-clicked]="selectedRows.has(row)"
+        *matRowDef="let row; columns: displayedColumns;"
+      ></tr>
+
     </table>
+    <button mat-button class="editing-delete-btn" (click)="deleteItem()">Delete</button>
   </div>

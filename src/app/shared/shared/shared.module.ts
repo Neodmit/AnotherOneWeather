@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     AppRoutingModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   exports:[
     LayoutComponent

@@ -23,7 +23,7 @@
 }
 
 .settings-header-home-logo{
-    margin-bottom: 12px;//Точно ли там 12, как по мне больше. Как проверить, что делать?
+    margin-bottom: 12px;
 }
 
 .settings-header-home-text{
@@ -80,7 +80,6 @@
     @include font-base;
     font-weight: 400;
     font-size:  14px;
-    //margine не работает, хз чё делать
 }
 
 
