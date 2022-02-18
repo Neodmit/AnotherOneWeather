@@ -1,61 +1,60 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
-import { LocalstorageService } from 'src/app/services/localstorageService.service';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { CityType } from 'src/app/types/CityType';
+import { WeatherType } from 'src/app/types/WeatherType';
+import { GetCurrentWeatherService } from 'src/app/services/get-wether/get-weather.service';
+import { CititesDataService } from 'src/app/services/citites-data/citites-data.service';
+import { MatTableDataSource } from '@angular/material/table';
 
-type CitiesType = {
-  name:string
-}
-
-type WeatherData = {
-  city:string
-  windSpeed:number
-  temp:number
-  humidity:number
-}
- 
 @Component({
   selector: 'app-editing-list',
   templateUrl: './editing-list.component.html',
   styleUrls: ['./editing-list.component.scss']
 })
-
 export class EditingListComponent implements OnInit{
 
-  cities:Array<CitiesType> = [];
+  cities:Array<CityType> = Object.assign([],this.cititesDataService.get());
   displayedColumns:Array<string> = ["city", "windSpeed", "temp", "humidity"];
-  URL:string = "http://api.openweathermap.org/data/2.5/weather?q=";
-  APIkey:string = "fa82c24fbe3e23c43513022266126294";
-  weatherItems:Array<WeatherData> = [
-    {//данные просто для теста
-      city: "asdf",
-      windSpeed: 23,
-      temp: 23, 
-      humidity: 32
-    }
-  ];
-  currentCityData?:WeatherData;
+  citiesLength?:number;
+  weatherItems:MatTableDataSource<WeatherType> = new MatTableDataSource;
+  cityName:string = ""
+  selectedRows = new Set<WeatherType>();
 
-  constructor(private localstorageService: LocalstorageService, private http: HttpClient) { }
+  constructor(private getCurrentWeatherService:GetCurrentWeatherService, private cititesDataService:CititesDataService) { }
 
-  ngOnInit(): void {  
-    this.cities = this.localstorageService.getLocalstorageData('PlaceesData') 
-    this.getCurrentWeather(this.cities, this.APIkey)
-    console.log(this.weatherItems)
+  ngOnInit() { 
+    this.setWeatherData()
   }
 
-  getCurrentWeather(items:Array<CitiesType>, Apikey:string):void {// надо будет вынести в сервис
-    for(let item of items){
-      this.http.get(this.URL + item.name + '&APPID=' + Apikey).subscribe(//он выводит данные раньше, чем их получает из-за асинхронности
-        (data:any) => {                                                  //чито поделать с этим? Замедлить? Использовать другой метод получения?
-          this.currentCityData={
-            city: item.name,
-            windSpeed: data["main"]["temp"],
-            temp: data["wind"]["speed"],
-            humidity: data["main"]["humidity"]
-          }
-          this.weatherItems.push(this.currentCityData)
-      })
+  setWeatherData(){
+    let chunk = 4
+    let tempCityArray:Array<CityType> = []
+    for (let i = 0, j = this.cities.length; i < j; i += chunk) {
+       tempCityArray = this.cities.slice(i, i + chunk);
+        this.getCurrentWeatherService.getBatchWeatherData(tempCityArray).then(
+        (items) => {
+          this.weatherItems.data = this.weatherItems.data.concat(items)
+        }
+      )
     }
   }
+
+  onEnter(){
+    this.cititesDataService.add(this.cityName)
+    this.cities = [{name: this.cityName}];
+    this.setWeatherData()
+    this.cityName=""
+  }
+
+  deleteItem(){
+     if(this.selectedRows.size > 0){
+      for(let selectItem of this.selectedRows){
+        let deleteIndex: number = this.weatherItems.data.indexOf(selectItem);
+        this.weatherItems.data.splice(deleteIndex, 1);
+        this.weatherItems._updateChangeSubscription();
+        this.cititesDataService.remove(selectItem.name!);
+      }
+     }
+
+   }
 
 }

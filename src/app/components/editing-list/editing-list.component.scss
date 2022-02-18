@@ -1,0 +1,46 @@
+@import "../../../styles/core/";
+
+.editing-page{
+    background-color: $color-menu-background;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    display: inline-block;
+}
+
+.editing-input{
+    margin-left: 165px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.editing-table{
+    width: 70%;
+    margin-left: 165px;
+    height: 20px;
+    margin-bottom: 20px;
+    @include font-base;
+}
+
+.editing-delete-btn{
+    margin-left: 165px;
+    width: 70%;
+    background-color: $color-button;
+    color: white;
+    border-radius: 8px;
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }

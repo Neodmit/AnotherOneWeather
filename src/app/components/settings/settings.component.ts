@@ -1,34 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { LocalstorageService } from 'src/app/services/localstorageService.service';
-
-type userType = {
-  name:String,
-  surname:String,
-  api:String
-}
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { UserDataService } from 'src/app/services/user-data/user-data.service';
+import { UserType } from 'src/app/types/UserType';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
-  
+export class SettingsComponent{
+
+  userData:UserType = this.userDataService.get();
   logoPath:string = "resources/pics/logo.svg";
-  userData:userType = {
-    name: ' ',
-    surname: ' ',
-    api: ' '
-  }
 
-  constructor(private localstorageService: LocalstorageService) { }
-
-  ngOnInit(): void {
-    this.userData = this.localstorageService.getLocalstorageData('UserData')
-  }
+  constructor(private userDataService:UserDataService) { }
 
   onSubmit(): void {
-    this.localstorageService.setLocalstorageData('UserData',this.userData);
+    this.userDataService.set(this.userData)
   }
 
 }

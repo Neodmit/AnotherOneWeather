@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit{
   }
 
   setMenuMode(width:Number): void {//Правила для окна
-    if(width<=991){
+    if(width<=991){ //TODO изменить способ определния
       this.menuOpenness = false,
       this.menuMode = "over";
     }
