@@ -36,7 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTableModule,
     MatCheckboxModule
   ],
-  exports:[
+  exports: [
     LayoutComponent
   ],
 })

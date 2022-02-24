@@ -6,19 +6,17 @@ import { LocalstorageService } from '../local-storage/localstorageService.servic
   providedIn: 'root'
 })
 export class UserDataService {
-  private userData:UserType = this.localstorageService.get("UserData");
+  private userData:UserType = this.localstorageService.get('UserData');
 
   constructor(private localstorageService: LocalstorageService) { }
 
-  public set(userData:UserType):void{
-    this.localstorageService.set('UserData', userData)
+  public set(userData:UserType):void {
+    this.userData = userData;
+    this.localstorageService.set('UserData', userData);
   }
 
   public get():UserType {
-    return this.userData
-  }
-
-  public getApi():string {
-    return this.userData.api
+    if (Object.keys(this.userData).length === 0) return { name: '', surname: '', api: '' };
+    return this.userData;
   }
 }

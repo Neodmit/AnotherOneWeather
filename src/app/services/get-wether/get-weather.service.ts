@@ -10,18 +10,22 @@ export class GetCurrentWeatherService {
 
   constructor(private openWeatherApiService:OpenWeatherApiService) { }
 
-  getBatchWeatherData(cities:Array<CityType>):Promise<WeatherType[]>{
-    let tempPromArr:Array<Promise<WeatherType>> = []
-    for(let city of cities){
+  getBatchWeatherData(cities:Array<CityType>):Promise<WeatherType[]> {
+    let tempPromArr:Array<Promise<WeatherType>> = [];
+    for (let city of cities) {
       tempPromArr.push(
-        new Promise((resolve) => 
-          this.openWeatherApiService.get(city.name).subscribe(
-          async data =>{
-          resolve(await data)
-          })
-        )
-      )
+        new Promise((resolve, reject) => {
+          this.openWeatherApiService.get(city.name).subscribe({
+            next: data => {
+              resolve(data);
+            },
+            error: err => {
+              reject(err);
+            }
+          });
+        })
+      );
     }
-    return Promise.all(tempPromArr)
+    return Promise.all(tempPromArr);
   }
 }

@@ -6,30 +6,30 @@ import { MatDrawerMode } from '@angular/material/sidenav';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit{
-  logoPath:string = "resources/pics/logo.svg";
+export class LayoutComponent implements OnInit {
+  logoPath:string = 'resources/pics/logo.svg';
 
   buttonStyle?:String;
   menuOpenness:boolean = false;
-  menuMode:MatDrawerMode="side";
+  menuMode:MatDrawerMode = 'side';
 
-  ngOnInit(): void {
+  ngOnInit():void {
     this.setMenuMode(window.innerWidth);//Режим меню при инициализации окна
   }
 
   @HostListener('window:resize', ['$event'])//Режим меню при движении окна
-  onResize(event:any): void {
-    this.setMenuMode(event.target.innerWidth)
+  onResize(event:any):void {
+    this.setMenuMode(event.target.innerWidth);
   }
 
-  setMenuMode(width:Number): void {//Правила для окна
-    if(width<=991){ //TODO изменить способ определния
+  setMenuMode(width:Number):void { //Правила для окна
+    if (width <= 991) { //TODO изменить способ определния
       this.menuOpenness = false,
-      this.menuMode = "over";
+      this.menuMode = 'over';
     }
-    else{
+    else {
       this.menuOpenness = true,
-      this.menuMode = "side";
+      this.menuMode = 'side';
     }
   }
 }
